@@ -1,0 +1,216 @@
+# Name:CHE-HAN HSU
+# OSU Email:hsuche@oregonstate.edu
+# Course: CS261 - Data Structures
+# Assignment:1
+# Due Date:04/22/2024
+# Description:know how to use the function
+
+
+import random
+from static_array import *
+
+
+# ------------------- PROBLEM 1 - MIN_MAX -----------------------------------
+
+def min_max(arr: StaticArray) -> tuple[int, int]:
+    min_val = arr.get(0)       # Initialize minimum value as the first number of the array
+    max_val = arr.get(0)       # Initialize maximum value as the first number of the array
+
+    for i in range(arr.length()):  # get the index of elements
+
+        current_num = arr.get(i)
+
+        if min_val > current_num:   # if minimum value greater than current number , then current number would be the new minimum value
+            min_val = current_num
+
+        if max_val < current_num:   ## if maximum value greater than current number , then current number would be the new maximum value
+            max_val = current_num
+
+    return (min_val, max_val)
+
+    """
+    TODO: Write this implementation
+    """
+
+    pass
+
+# ------------------- PROBLEM 2 - FIZZ_BUZZ ---------------------------------
+
+def fizz_buzz(arr: StaticArray) -> StaticArray:
+
+
+    new_arr = []  # create the new arr
+
+    for i in range(arr.length()):       ## get the index of elements
+        num = arr.get(i)
+
+        if num % 3 == 0 and num % 5 == 0:    # if the number can be divided by both 3 and 5
+            new_arr.append('fizzbuzz')    #appends an element to the end of the new array
+        elif num % 3 == 0:                  # if the number can be divided by 3
+            new_arr.append('fizz')
+        elif num % 5 == 0:                 # if the number can be divided 5
+            new_arr.append('buzz')
+        else:
+            new_arr.append(num)            # neither can be divided by 3 and 5 append the original number to the end of the new array
+    return new_arr
+    """
+    TODO: Write this implementation
+    """
+    pass
+
+# ------------------- PROBLEM 3 - REVERSE -----------------------------------
+
+def reverse(arr: StaticArray) -> None:
+
+
+    len = arr.length()      #  calculates the length of the array
+
+    start  = 0              # start with the first value
+    end = len - 1
+
+    while start < end:            # loop will continue if the start value less than end value
+        temporary = arr.get(start)
+        arr.set(start, arr.get(end))    # sets the element at index start
+        arr.set(end, temporary)         #  sets the element at index end
+
+        start += 1     # move 1 to the end of the array
+        end -= 1        #move 1 to the beginning of the array
+    """
+    TODO: Write this implementation
+    """
+    pass
+
+# ------------------- PROBLEM 4 - ROTATE ------------------------------------
+
+def rotate(arr: StaticArray, steps: int) -> StaticArray:
+
+    length = arr.length()   # calculates the length of the array
+    steps %= length         #to make sure that they are within the range of the array length
+
+    if steps == 0:         # if the number of steps is 0, it means the array remains unchanged after rotation
+        return arr[:]
+    if steps > 0:
+        return arr[-steps:] + arr[:-steps]
+    else:
+        return arr[-steps:] + arr[:-steps]
+"""
+    TODO: Write this implementation
+    """
+    pass
+
+# ------------------- PROBLEM 5 - SA_RANGE ----------------------------------
+
+def sa_range(start: int, end: int) -> StaticArray:
+
+    return [i for i in range(start, end + 1)]   # include each i from start to end
+    """
+    TODO: Write this implementation
+    """
+    pass
+
+# ------------------- PROBLEM 6 - IS_SORTED ---------------------------------
+
+def is_sorted(arr: StaticArray) -> int:
+
+    for i in range(arr.length() - 1):
+        if arr[i] < arr[i + 1]:         #if the former value is less than the later value,
+            arr = ascending             #it means the array is sorted in strictly ascending order.
+        elif arr[i] > arr[i + 1]:      #if the former value is greater than the later value,
+            arr = descending           #it means the array is sorted in strictly descending order.
+
+    if ascending:
+        return 1
+    elif descending:
+        return -1
+    else:
+        return 0
+
+
+
+    """
+    TODO: Write this implementation
+    """
+    pass
+
+# ------------------- PROBLEM 7 - FIND_MODE -----------------------------------
+
+def find_mode(arr: StaticArray) -> tuple[object, int]:
+    mode = arr[0]    #Initialize mode as the first element of the array
+    max_freq = 1     #Initialize max frequency as 1
+    current_num = arr[0]  #Initialize current number as the first element of the array
+    current_freq = 1     #Initialize current frequency as 1
+
+    for i in range(1, arr.length()):
+        if arr[i] == current_num:    #If the current element is equal to the previous one,
+            current_freq += 1         #increment current frequency
+        else:
+            if current_freq > max_freq:    #If the current element is greater than the maximum frequency,
+                mode = current_num
+                max_freq = current_freq    #update the number of maximum frequency to the number of current frequency
+            current_num = arr[i]
+            current_freq = 1
+
+    if current_freq > max_freq:
+        mode = current_num
+        max_freq = current_freq
+
+    return mode, max_freq
+
+
+    """
+    TODO: Write this implementation
+    """
+    pass
+
+# ------------------- PROBLEM 8 - REMOVE_DUPLICATES -------------------------
+
+def remove_duplicates(arr: StaticArray) -> StaticArray:
+
+    if not arr:
+        return []
+
+    result = [arr[0]]    #Initialize the result list with the first element of the array
+
+    for i in range(1, arr.length):
+        if arr[i] != arr[i - 1]:      #if the current element is different from the previous one,
+            result.append(arr[i])    #append it to the result list
+
+    return result
+
+    """
+    TODO: Write this implementation
+    """
+    pass
+
+# ------------------- PROBLEM 9 - COUNT_SORT --------------------------------
+
+def count_sort(arr: StaticArray) -> StaticArray:
+
+
+
+
+    """
+    TODO: Write this implementation
+    """
+    pass
+
+# ------------------- PROBLEM 10 - SORTED SQUARES ---------------------------
+
+def sorted_squares(arr: StaticArray) -> StaticArray:
+
+    n = arr.length()
+    result = StaticArray.init(n)    #Initialize a static array to store the squared values
+
+    left, right = 0, n - 1          #Initialize two pointers for the left and right ends of the array
+    for i in range(n - 1, -1, -1):
+        if abs(arr[left]) > abs(arr[right]):    #if absolute value of left element is greater than right,
+            result.set(i, arr[left] * arr[left])   #square it and place it in result array
+            left += 1                          #move the left pointer to the right
+        else:                                     #if absolute value of right element is greater or equal,
+            result.set(i, arr[right] * arr[right])     #square it and place it in result array
+            right -= 1                             ## Move the right pointer to the left
+    return result
+    """
+    TODO: Write this implementation
+    """
+    pass
